@@ -120,16 +120,16 @@ function refuel()
 end
 
 function moveH()
-	if inv.isInventoryFull() then
+	if VQE.isInventoryFull() then
 		out("Dropping thrash")
-		inv.dropThrash()
+		VQE.dropThrash()
 		
-		if inv.isInventoryFull() then
+		if VQE.isInventoryFull() then
 			out ("Stacking items")
-			inv.stackItems()
+			VQE.stackItems()
 		end
 		
-		if inv.isInventoryFull() then
+		if VQE.isInventoryFull() then
 			out("Full inventory!")
 			return FULLINV  
 		end
@@ -144,15 +144,15 @@ function moveH()
 	
 	if facingfw and y<max-1 then
 	-- Going one way
-		local dugFw = t.dig()
+		local dugFw = VT.dig()
 		if dugFw == false then
 			out("Hit bedrock, can't keep going")
 			return BLOCKEDMOV
 		end
-		t.digUp()
-		t.digDown()
+		VT.digUp()
+		VT.digDown()
 	
-		if t.fw() == false then
+		if VT.fw() == false then
 			return BLOCKEDMOV
 		end
 		
@@ -160,11 +160,11 @@ function moveH()
 	
 	elseif not facingfw and y>0 then
 	-- Going the other way
-		t.dig()
-		t.digUp()
-		t.digDown()
+		VT.dig()
+		VT.digUp()
+		VT.digDown()
 		
-		if t.fw() == false then
+		if VT.fw() == false then
 			return BLOCKEDMOV
 		end
 		
@@ -172,8 +172,8 @@ function moveH()
 		
 	else
 		if x+1 >= max then
-			t.digUp()
-			t.digDown()
+			VT.digUp()
+			VT.digDown()
 			return LAYERCOMPLETE -- Done with this Y level
 		end
 		
@@ -184,11 +184,11 @@ function moveH()
 			turtle.turnLeft()
 		end
 		
-		t.dig()
-		t.digUp()
-		t.digDown()
+		VT.dig()
+		VT.digUp()
+		VT.digDown()
 		
-		if t.fw() == false then
+		if VT.fw() == false then
 			return BLOCKEDMOV
 		end
 		
@@ -233,11 +233,11 @@ function goToOrigin()
 		
 		turtle.turnLeft()
 		
-		t.fw(x)
+		VT.fw(x)
 		
 		turtle.turnLeft()
 		
-		t.fw(y)
+		VT.fw(y)
 		
 		turtle.turnRight()
 		turtle.turnRight()
@@ -246,11 +246,11 @@ function goToOrigin()
 		
 		turtle.turnRight()
 		
-		t.fw(x)
+		VT.fw(x)
 		
 		turtle.turnLeft()
 		
-		t.fw(y)
+		VT.fw(y)
 		
 		turtle.turnRight()
 		turtle.turnRight()
@@ -267,7 +267,7 @@ function goUp()
 
 	while z < 0 do
 		
-		t.up()
+		VT.up()
 		
 		z = z+1
 		
@@ -291,8 +291,8 @@ function mainloop()
 		goToOrigin()
 		
 		for i=1, 3 do
-			t.digDown()
-			success = t.down()
+			VT.digDown()
+			success = VT.down()
 		
 			if not success then
 				goUp()
