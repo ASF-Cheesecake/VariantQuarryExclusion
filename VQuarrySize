@@ -1,5 +1,5 @@
-os.loadAPI("VQE")
-os.loadAPI("VT")
+os.loadAPI("inv")
+os.loadAPI("t")
 
 local x = 0
 local y = 0
